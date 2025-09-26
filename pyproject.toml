@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inet-api-client"
+version = "1.2.0"
+description = "Sky Cloud API Client - 用于访问Sky Cloud平台API的Python客户端库"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Bobby Sheng", email = "Bobby@sky-cloud.net"}
+]
+keywords = ["sky-cloud", "api", "client", "network", "management", "vlan", "vpn"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers", 
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9", 
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+    "Topic :: System :: Networking",
+]
+dependencies = [
+    "aiohttp>=3.8.0",
+    "pyjwt>=2.0.0", 
+    "pycryptodome>=3.15.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=22.0.0",
+    "flake8>=5.0.0", 
+    "mypy>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/sky-cloud/sky-api-client"
+Repository = "https://github.com/sky-cloud/sky-api-client"
+Documentation = "https://github.com/sky-cloud/sky-api-client/blob/main/README.md"
+"Bug Reports" = "https://github.com/sky-cloud/sky-api-client/issues"
