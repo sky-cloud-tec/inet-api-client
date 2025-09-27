@@ -18,36 +18,46 @@ pip install inet-api-client
 ```
 
 ## 🚀 快速开始
+## 🔧 环境变量
 
-### 基础用法（推荐）
+您可以通过环境变量来配置客户端：
+
+```bash
+export SKY_API_HOST="192.168.1.100"
+export SKY_API_USERNAME="admin"
+export SKY_API_PASSWORD="password" 
+```
+
+### 使用封装接口用法
 
 ```python
 import asyncio
 from inet_api_client import ApiClient    
 
 async def main():
-    # 使用上下文管理器（推荐）
-    async with ApiClient(host="192.168.1.100") as client:
-        # 获取设备信息
-        device_info = await client.get_device_by_ip("192.168.1.1")
-        print(f"设备信息: {device_info}")
-        
-        # 获取 VLAN 列表
-        vlan_list = await client.get_vlan_list_simple()
-        print(f"VLAN 列表: {vlan_list}")
+    
+    api_client = ApiClient(host="192.168.1.100")
+    await api_client.init_login()
+    # 获取设备信息
+    device_info = await client.get_device_by_ip("192.168.1.1")
+    print(f"设备信息: {device_info}")
+    
+    # 获取 VLAN 列表
+    vlan_list = await client.get_vlan_list_simple()
+    print(f"VLAN 列表: {vlan_list}")
 
 # 运行异步函数
 asyncio.run(main())
 ```
 
-### 传统用法（完全兼容现有脚本）
+### 直接使用url请求用法
 
 ```python
 import asyncio
 from inet_api_client import ApiClient
 
 async def main():
-    # 传统初始化方式（完全兼容现有脚本）
+    # 初始化方式（完全兼容现有脚本）
     api_client = ApiClient()
     await api_client.init_login()
     
@@ -171,14 +181,15 @@ from inet_api_client import ApiClient
 
 async def device_management_example():
     """设备管理示例"""
-    async with ApiClient(host="192.168.1.100") as client:
-        # 获取所有设备
-        devices = await client.get_device_list()
-        print(f"总设备数: {len(devices.get('data', {}).get('content', []))}")
-        
-        # 根据 IP 查找特定设备
-        device_info = await client.get_device_by_ip("192.168.1.1")
-        print(f"设备详情: {device_info}")
+    api_client = ApiClient()
+    await api_client.init_login()
+    # 获取所有设备
+    devices = await client.get_device_list()
+    print(f"总设备数: {len(devices.get('data', {}).get('content', []))}")
+    
+    # 根据 IP 查找特定设备
+    device_info = await client.get_device_by_ip("192.168.1.1")
+    print(f"设备详情: {device_info}")
 
 asyncio.run(device_management_example())
 ```
@@ -191,19 +202,20 @@ from inet_api_client import ApiClient
 
 async def vlan_management_example():
     """VLAN 管理示例"""
-    async with ApiClient(host="192.168.1.100") as client:
-        # 获取 VLAN 列表
-        vlan_list = await client.get_vlan_list_simple()
-        print(f"VLAN 列表: {vlan_list}")
-        
-        # 创建新 VLAN
-        new_vlan = {
-            "name": "测试VLAN",
-            "vlan_id": 100,
-            "description": "测试用途"
-        }
-        result = await client.create_vlan(new_vlan)
-        print(f"创建 VLAN 结果: {result}")
+    api_client = ApiClient()
+    await api_client.init_login()
+    # 获取 VLAN 列表
+    vlan_list = await client.get_vlan_list_simple()
+    print(f"VLAN 列表: {vlan_list}")
+    
+    # 创建新 VLAN
+    new_vlan = {
+        "name": "测试VLAN",
+        "vlan_id": 100,
+        "description": "测试用途"
+    }
+    result = await client.create_vlan(new_vlan)
+    print(f"创建 VLAN 结果: {result}")
 
 asyncio.run(vlan_management_example())
 ```
@@ -218,17 +230,6 @@ asyncio.run(vlan_management_example())
 | `username` | str | 从环境变量读取 | 用户名 |
 | `password` | str | 从环境变量读取 | 密码 |
 | `timeout` | int | 30 | 请求超时时间（秒） |
-
-## 🔧 环境变量
-
-您可以通过环境变量来配置客户端：
-
-```bash
-export SKY_API_HOST="192.168.1.100"
-export SKY_API_USERNAME="admin"
-export SKY_API_PASSWORD="password"
-```
-
 
 ## 🤝 贡献
 
