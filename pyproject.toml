@@ -5,14 +5,14 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "inet-api-client"
 version = "1.2.0"
-description = "Sky Cloud API Client - 用于访问Sky Cloud平台API的Python客户端库"
+description = "Inet API Client - 用于访问Sky Cloud平台API的Python客户端库"
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
     {name = "Bobby Sheng", email = "Bobby@sky-cloud.net"}
 ]
-keywords = ["sky-cloud", "api", "client", "network", "management", "vlan", "vpn"]
+keywords = ["inet-api", "sky-cloud", "api", "client", "network", "management", "vlan", "vpn"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers", 
@@ -43,7 +43,7 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/sky-cloud/sky-api-client"
-Repository = "https://github.com/sky-cloud/sky-api-client"
-Documentation = "https://github.com/sky-cloud/sky-api-client/blob/main/README.md"
-"Bug Reports" = "https://github.com/sky-cloud/sky-api-client/issues"
+Homepage = "https://github.com/sky-cloud/inet-api-client"
+Repository = "https://github.com/sky-cloud/inet-api-client"
+Documentation = "https://github.com/sky-cloud/inet-api-client/blob/main/README.md"
+"Bug Reports" = "https://github.com/sky-cloud/inet-api-client/issues"

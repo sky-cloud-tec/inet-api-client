@@ -22,7 +22,7 @@ def clean_build():
     """清理构建文件"""
     print("清理构建文件...")
     
-    dirs_to_clean = ['build', 'dist', 'sky_api_client.egg-info']
+    dirs_to_clean = ['build', 'dist', 'inet_api_client.egg-info']
     for dir_name in dirs_to_clean:
         if os.path.exists(dir_name):
             shutil.rmtree(dir_name)
@@ -76,11 +76,11 @@ def test_import():
     print("测试导入...")
     
     try:
-        import sky_api_client
-        print(f"✅ 导入成功，版本: {sky_api_client.__version__}")
+        import inet_api_client
+        print(f"✅ 导入成功，版本: {inet_api_client.__version__}")
         
         # 测试主要类
-        from sky_api_client import SkyApiClient, SkyApiException
+        from inet_api_client import ApiClient, SkyApiException
         print("✅ 主要类导入成功")
         
         return True
@@ -105,11 +105,6 @@ def publish_to_pypi():
     """发布到PyPI"""
     print("发布到PyPI...")
     
-    confirm = input("确定要发布到正式PyPI吗？(yes/no): ")
-    if confirm.lower() != 'yes':
-        print("取消发布")
-        return False
-    
     if not run_command("twine upload dist/*"):
         print("❌ 发布到PyPI失败")
         return False
@@ -120,7 +115,7 @@ def publish_to_pypi():
 
 def main():
     """主函数"""
-    print("Sky API Client 构建和发布工具")
+    print("Inet API Client 构建和发布工具")
     print("===============================")
     
     if len(sys.argv) < 2:

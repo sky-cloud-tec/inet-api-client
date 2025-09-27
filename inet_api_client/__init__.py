@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Sky Cloud API Client
+Inet API Client
 独立的PyPI包，用于访问Sky Cloud平台API
 """
 

@@ -1,1 +1,1 @@
-sky_api_client
+inet_api_client

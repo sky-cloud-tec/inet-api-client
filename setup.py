@@ -10,17 +10,17 @@ def read_long_description():
     if os.path.exists(readme_path):
         with open(readme_path, "r", encoding="utf-8") as f:
             return f.read()
-    return "Sky Cloud API Client - 用于访问Sky Cloud平台API的Python客户端库"
+    return "Inet API Client - 用于访问Sky Cloud平台API的Python客户端库"
 
 setup(
     name="inet-api-client",
     version="1.2.0",
     author="Bobby Sheng",
     author_email="Bobby@sky-cloud.net",
-    description="Sky Cloud API Client - 用于访问Sky Cloud平台API的Python客户端库",
+    description="Inet API Client - 用于访问Sky Cloud平台API的Python客户端库",
     long_description=read_long_description(),
     long_description_content_type="text/markdown",
-    url="https://github.com/sky-cloud/sky-api-client",
+    url="https://github.com/sky-cloud/inet-api-client",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -51,10 +51,10 @@ setup(
             "mypy>=1.0.0",
         ],
     },
-    keywords="sky-cloud api client network management vlan vpn",
+    keywords="inet-api sky-cloud api client network management vlan vpn",
     project_urls={
-        "Bug Reports": "https://github.com/sky-cloud/sky-api-client/issues",
-        "Source": "https://github.com/sky-cloud/sky-api-client",
-        "Documentation": "https://github.com/sky-cloud/sky-api-client/blob/main/README.md",
+        "Bug Reports": "https://github.com/sky-cloud/inet-api-client/issues",
+        "Source": "https://github.com/sky-cloud/inet-api-client",
+        "Documentation": "https://github.com/sky-cloud/inet-api-client/blob/main/README.md",
     },
 )
