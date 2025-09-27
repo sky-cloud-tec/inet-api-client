@@ -5,6 +5,7 @@ dist/
 
 # Build and publish script
 build_and_publish.py
+MANIFEST.in
 
 # Python cache
 __pycache__/
