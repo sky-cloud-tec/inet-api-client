@@ -8,7 +8,7 @@ Inet API Client
 from .client import ApiClient
 from .exceptions import SkyApiException, AuthenticationError, APIRequestError
 
-__version__ = "1.1.0"
+__version__ = "1.2.2"
 __author__ = "Bobby Sheng <Bobby@sky-cloud.net>"
 
 __all__ = [

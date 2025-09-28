@@ -4,7 +4,7 @@
 Sky Cloud API 方法定义，重构自原有的ApiBase
 """
 
-from typing import Dict, List, Any, Union
+from typing import Dict, List, Any
 
 
 class ApiMethods:

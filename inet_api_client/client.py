@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 from typing import Optional
 from .base_client import BaseClient
 from .api_methods import ApiMethods
-from .exceptions import TokenExpiredError, AuthenticationError
+from .exceptions import  AuthenticationError
 
 
 class ApiClient(BaseClient, ApiMethods):
@@ -76,7 +76,6 @@ class ApiClient(BaseClient, ApiMethods):
         super().__init__(host, port, protocol, username, password, timeout)
         self.token = token
         self.auto_login = auto_login
-        self._authenticated = False
         
         # 设置日志
         logging.basicConfig(
@@ -110,7 +109,6 @@ class ApiClient(BaseClient, ApiMethods):
                 self.logger.warning("提供的token已过期，尝试重新登录")
                 await self._perform_login()
             else:
-                self._authenticated = True
                 self.logger.info("Token验证成功")
         else:
             await self._perform_login()
@@ -126,7 +124,6 @@ class ApiClient(BaseClient, ApiMethods):
                 login_token = await self.work_login_init()
                 
             self.token = login_token
-            self._authenticated = True
             self.logger.info("登录成功")
             
         except Exception as e:
@@ -164,88 +161,5 @@ class ApiClient(BaseClient, ApiMethods):
             self.logger.error(f"Token检查过程中发生错误: {e}")
             return True
 
-    def is_authenticated(self) -> bool:
-        """
-        检查是否已认证
-        
-        Returns:
-            认证状态
-        """
-        return self._authenticated
 
-    async def ensure_authenticated(self):
-        """
-        确保已认证，如果未认证则进行登录
-        """
-        if not self._authenticated:
-            await self.init_login()
 
-    # 为了方便使用，提供一些常用方法的简化版本
-    async def get_device_by_ip(self, ip: str, **kwargs):
-        """
-        通过IP获取设备信息
-        
-        Args:
-            ip: 设备IP地址
-            **kwargs: 其他查询参数
-            
-        Returns:
-            设备信息
-        """
-        await self.ensure_authenticated()
-        data = {"ip": ip, **kwargs}
-        return await self.get_devices_info_for_ip("GET", data)
-
-    async def get_device_by_name(self, name: str, **kwargs):
-        """
-        通过名称获取设备信息
-        
-        Args:
-            name: 设备名称
-            **kwargs: 其他查询参数
-            
-        Returns:
-            设备信息
-        """
-        await self.ensure_authenticated()
-        data = {"name": name, **kwargs}
-        return await self.get_devices_info_for_name("POST", data)
-
-    async def get_vpn_list_simple(self, **kwargs):
-        """
-        获取VPN列表的简化方法
-        
-        Args:
-            **kwargs: 查询参数
-            
-        Returns:
-            VPN列表
-        """
-        await self.ensure_authenticated()
-        return await self.get_vpn_list("POST", kwargs)
-
-    async def get_vlan_list_simple(self, **kwargs):
-        """
-        获取VLAN列表的简化方法
-        
-        Args:
-            **kwargs: 查询参数
-            
-        Returns:
-            VLAN列表
-        """
-        await self.ensure_authenticated()
-        return await self.list_get_vlan("POST", kwargs)
-
-    async def create_workflow_task(self, task_data: dict):
-        """
-        创建工作流任务的简化方法
-        
-        Args:
-            task_data: 任务数据
-            
-        Returns:
-            创建结果
-        """
-        await self.ensure_authenticated()
-        return await self.create_flow_task("POST", task_data)

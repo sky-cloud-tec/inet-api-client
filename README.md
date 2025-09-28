@@ -82,10 +82,10 @@ async def main():
     # 自定义配置
     client = ApiClient(
         host="192.168.1.100",
-        port=443,
-        protocol="https",
-        username="admin",
-        password="password",
+        port=80,
+        protocol="http",
+        username="xxx",
+        password="xxx",
         timeout=30
     )
     
@@ -144,15 +144,15 @@ async def batch_business_example():
     process_data = {
         "request": [
             {
-                "branch": "深圳互联网分公司",
-                "customerName": "测试客户",
-                "idc": "上海金桥中心",
-                "switch_a": "S-SHB1-J34-JSJY-N3548-A",
-                "interface_a": "Ethemet1/28",
-                "vlan": "128",
-                "pvlan": "387",
-                "rack": "SHJQ-BL1-J36",
-                "unit": "1",
+                "branch": "xxx",
+                "customerName": "xxx",
+                "idc": "xxx",
+                "switch_a": "xxx",
+                "interface_a": "xxx",
+                "vlan": "12",
+                "pvlan": "56",
+                "rack": "xxx",
+                "unit": "xxx",
             }
         ]
     }
@@ -210,9 +210,9 @@ async def vlan_management_example():
     
     # 创建新 VLAN
     new_vlan = {
-        "name": "测试VLAN",
+        "name": "xxx",
         "vlan_id": 100,
-        "description": "测试用途"
+        "description": "xxx"
     }
     result = await client.create_vlan(new_vlan)
     print(f"创建 VLAN 结果: {result}")
@@ -225,7 +225,7 @@ asyncio.run(vlan_management_example())
 | 参数 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
 | `host` | str | 从环境变量读取 | Sky Cloud 服务器地址 |
-| `port` | int | 443 | 服务器端口 |
+| `port` | int | 80 | 服务器端口 |
 | `protocol` | str | "https" | 协议类型 |
 | `username` | str | 从环境变量读取 | 用户名 |
 | `password` | str | 从环境变量读取 | 密码 |
