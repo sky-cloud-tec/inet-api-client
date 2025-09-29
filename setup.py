@@ -14,7 +14,7 @@ def read_long_description():
 
 setup(
     name="inet-api-client",
-    version="1.2.2",
+    version="1.2.5",
     author="Bobby Sheng",
     author_email="Bobby@sky-cloud.net",
     description="Inet API Client - 用于访问Sky Cloud平台API的Python客户端库",

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "inet-api-client"
-version = "1.2.2"
+version = "1.2.5"
 description = "Inet API Client - 用于访问Sky Cloud平台API的Python客户端库"
 readme = "README.md"
 requires-python = ">=3.8"

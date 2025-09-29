@@ -132,10 +132,7 @@ class ApiClient(BaseClient, ApiMethods):
             self.logger.info("开始用户名密码登录")
             login_token = await self.work_login_init()
             
-            if self.check_token(login_token):
-                # Token已过期，重新登录
-                login_token = await self.work_login_init()
-                
+            # 账号密码登录时，新获取的token应该是有效的，不需要检查
             self.token = login_token
             self.logger.info("登录成功")
             
