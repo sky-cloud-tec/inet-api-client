@@ -4,6 +4,7 @@
 Sky Cloud API 主客户端类，集成认证和API方法
 """
 
+import os
 import jwt
 import logging
 from datetime import datetime, timezone
@@ -25,8 +26,8 @@ class ApiClient(BaseClient, ApiMethods):
         host: Optional[str] = None,
         port: int = 80,
         protocol: str = "http",
-        username: str = "admin",
-        password: str = "r00tme",
+        username: Optional[str] = None,
+        password: Optional[str] = None,
         timeout: int = 60,
         token: Optional[str] = None,
         auto_login: bool = True
@@ -35,16 +36,22 @@ class ApiClient(BaseClient, ApiMethods):
         初始化Sky Cloud API客户端
         
         Args:
-            host: Sky Cloud服务器主机地址 (可选，兼容无参数初始化)
+            host: Sky Cloud服务器主机地址 (可选，优先从环境变量SKY_API_HOST读取)
             port: 服务器端口，默认80
             protocol: 协议，默认http (http/https)
-            username: 用户名，默认admin
-            password: 密码，默认r00tme
+            username: 用户名 (可选，优先从环境变量SKY_API_USERNAME读取)
+            password: 密码 (可选，优先从环境变量SKY_API_PASSWORD读取)
             timeout: 请求超时时间，默认60秒
             token: 可选的预设token，如果提供则跳过登录
             auto_login: 是否自动登录，默认True
             
         Example:
+            # 使用环境变量配置
+            export SKY_API_HOST="192.168.30.52"
+            export SKY_API_USERNAME="admin"
+            export SKY_API_PASSWORD="your_password"
+            client = ApiClient()
+            
             # 兼容原有脚本的用法
             client = ApiClient()
             await client.init_login()
@@ -69,9 +76,15 @@ class ApiClient(BaseClient, ApiMethods):
                 auto_login=False
             )
         """
-        # 兼容无参数初始化，使用默认配置
+        # 从环境变量读取配置，如果参数未提供
         if host is None:
-            host = "192.168.30.52"  # 默认host，可以根据需要修改
+            host = os.environ.get("SKY_API_HOST", "192.168.30.52")
+        
+        if username is None:
+            username = os.environ.get("SKY_API_USERNAME", "admin")
+            
+        if password is None:
+            password = os.environ.get("SKY_API_PASSWORD", "r00tme")
             
         super().__init__(host, port, protocol, username, password, timeout)
         self.token = token
